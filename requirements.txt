@@ -1,0 +1,18 @@
+#requirements for mytensor env.
+flask
+gunicorn
+tensorflow==1.14.0
+pillow
+lxml
+Cython
+matplotlib
+pandas
+opencv-python
+keras
+requests
+boto3
+pytest
+imageai
+beautifulsoup4
+opencv-contrib-python
+psycopg2-binary

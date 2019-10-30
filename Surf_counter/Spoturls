@@ -1,0 +1,4 @@
+
+class SplotUrls:
+    lookup={'venice_beach': 'http://www.surfline.com/surfdata/video-rewind/video_rewind.cfm?id=146850&camAlias=wc-venicebeachclose&CFID=459565&CFTOKEN=85392160'}
+
