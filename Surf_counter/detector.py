@@ -12,21 +12,29 @@ import urllib.request
 print("I am here 1")
 url = 'https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5'
 urllib.request.urlretrieve(url, 'models/yolo.h5')
+s3=s3pushpull()
+
+#s3.upload_aws('models/yolo.h5', 'S3:/models/yolo.h5')
+#s3.download_aws('models/yolo.h5','S3:/models/yolo.h5')
+
 
 class Detect:
     print("I am here 2")
     model_path = "./models/yolo.h5"
     output_path = "./output/breakwaterFull.jpg"
-    #detector = ObjectDetection()
-    #detector.setModelTypeAsYOLOv3()
-    #detector.setModelPath(model_path)
-    print("I am here 3")
-    #detector.loadModel()
+    detector = ObjectDetection()
+    detector.setModelTypeAsYOLOv3()
+    detector.setModelPath(model_path)
+    print("I am here 3 ")
+    detector.loadModel()
 
     def __init__(self):
         self.surfimages = ['./data/breakwater/'+ f for f in listdir('./data/breakwater') if f[0] !='.' and isfile(join('./data/breakwater', f))]
         self.current_link=SpotUrls.venice_static
     
+    def load_tensor(self):
+        pass
+
     #ScrapeVideoLinks
     def grab_frames(self):
         '''Pull images from video'''
