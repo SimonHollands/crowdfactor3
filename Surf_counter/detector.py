@@ -8,17 +8,19 @@ from Surf_counter.spot_urls import SpotUrls
 from Surf_counter.scrape_video_links import ScrapeVideoLinks
 from s3pushpull import s3pushpull
 import urllib.request
-print("I am herrweeee")
+
+print("I am here 1")
 url = 'https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5'
 urllib.request.urlretrieve(url, 'models/yolo.h5')
 
 class Detect:
+    print("I am here 2")
     model_path = "./models/yolo.h5"
     output_path = "./output/breakwaterFull.jpg"
     #detector = ObjectDetection()
     #detector.setModelTypeAsYOLOv3()
     #detector.setModelPath(model_path)
-    print("I am herrweeee")
+    print("I am here 3")
     #detector.loadModel()
 
     def __init__(self):
@@ -29,6 +31,7 @@ class Detect:
     def grab_frames(self):
         '''Pull images from video'''
         r=ReadVidz(self.current_link)
+        print("Are you kiddddddiiiinnng")
         r.pull_frames(5)
         self.surfimages = ['./data/breakwater/'+ f for f in listdir('./data/breakwater') if f[0] !='.' and isfile(join('./data/breakwater', f))]
 

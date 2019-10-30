@@ -4,9 +4,9 @@ from flask import send_file
 from os import listdir
 from os.path import isfile, join
 import os, shutil
-from s3pushpull import s3pushpull
+#from s3pushpull import s3pushpull
 #ddd
-#from Surf_counter.detector import Detect
+from Surf_counter.detector import Detect
 from Surf_counter.spot_urls import SpotUrls
 #from Surf_counter.scrape_video_links import ScrapeVideoLinks
     
