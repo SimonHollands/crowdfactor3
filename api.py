@@ -9,7 +9,7 @@ import os, shutil
 from Surf_counter.detector import Detect
 from Surf_counter.spot_urls import SpotUrls
 #from Surf_counter.scrape_video_links import ScrapeVideoLinks
-    
+#FF
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
