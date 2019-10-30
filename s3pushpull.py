@@ -126,6 +126,7 @@ class s3pushpull:
 #s3=s3pushpull()
 #d=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
 #s3.download_aws('data/frameyewwwwwW.jpg',d[0])
+#s3.upload_aws('models/yolo.h5', 'S3:/models/yolo.h5')
 
 
 # ACCESS_KEY = os.environ['AWS_IAM_ACCESS_KEY'] #I think this is the EKC
