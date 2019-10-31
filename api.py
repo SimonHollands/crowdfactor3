@@ -21,7 +21,7 @@ s3=s3pushpull()
 def breakwater_count():
     print ("In breakwater_count")
     n_surfers=det.detection()
-    out=f'''There are {n_surfers} Surfers'''
+    out=f'''There are {n_surfers} Surfers at the Breakwater. New Counts every 10 Minutes'''
     return render_template("breakwater_count.html", message=out)
 
 @app.route('/breakwater_image')
