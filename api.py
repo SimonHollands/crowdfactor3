@@ -19,6 +19,7 @@ s3=s3pushpull()
 
 @app.route('/breakwater_count')
 def breakwater_count():
+    print ("In breakwater_count")
     n_surfers=det.detection()
     out=f'''There are {n_surfers} Surfers'''
     return render_template("breakwater_count.html", message=out)
