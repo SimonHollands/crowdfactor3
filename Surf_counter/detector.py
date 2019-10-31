@@ -17,7 +17,9 @@ class Detect:
 
     def pull_images_s3(self):
         '''Pull images from video'''
+        print ("In:pull_images_s3")
         r=ReadVidz(self.current_link)
+        print("pass ReadVidz")
         r.pull_frames_s3(1)
 
     def detection(self):

@@ -21,6 +21,9 @@ class s3pushpull:
                             aws_secret_access_key=self.SECRET_KEY)
         self.bucket='surfcounter14367'
 
+    def delete(self,S3key):
+        self.s3.delete_object(self.bucket, S3key)
+
     def upload_aws(self, local_file, s3_file):
         bucket=self.bucket
         try:

@@ -25,7 +25,9 @@ def breakwater_count():
 
 @app.route('/breakwater_image')
 def get_image(): 
+    print("Downloading")
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
+    print("Done Down")
     if request.args.get('type') == '1':
         filename = 'pred.jpg'
     else:
@@ -36,19 +38,6 @@ def get_image():
 def index():
     det.pull_images_s3()
     return render_template('index.html')
-
-@app.route('/cool_form', methods=['GET', 'POST'])
-def cool_form():
-    if request.method == 'POST':
-        # do stuff when the form is submitted
-
-        # redirect to end the POST handling
-        # the redirect can be to the same route or somewhere else
-        return redirect(url_for('index'))
-
-    # show the form, it wasn't submitted
-    return render_template('cool_form.html')
-
 
 if __name__ == '__main__':
     app.run(threaded=False,use_reloader=False)
