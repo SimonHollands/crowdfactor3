@@ -9,19 +9,18 @@ from Surf_counter.spot_urls import SpotUrls
 from s3pushpull2 import s3pushpull
 from flask import render_template
 from flask import Flask, request, url_for, redirect, render_template
-
-from flask_caching import Cache
+#from flask_caching import Cache
 
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+#cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 det=Detect()
 s3=s3pushpull()
 
 @app.route('/breakwater_count')
-@cache.cached(timeout=5)
+#@cache.cached(timeout=5)
 def breakwater_count():
     print ("In breakwater_count")
     n_surfers=det.detection()
@@ -39,9 +38,7 @@ def show_loaded_image():
 
 @app.route('/breakwater_image')
 def get_image(): 
-    print("Downloading")
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
-    print("Done Down")
     if request.args.get('type') == '1':
         filename = 'pred.jpg'
     else:
@@ -50,6 +47,7 @@ def get_image():
 
 @app.route('/')
 def index():
+    det=Detect()
     det.pull_images_s3()
     return render_template('index.html')
 
