@@ -16,3 +16,4 @@ imageai
 beautifulsoup4
 opencv-contrib-python
 psycopg2-binary
+flask_caching
