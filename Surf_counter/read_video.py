@@ -1,7 +1,7 @@
 # Importing all necessary libraries 
 import cv2 
 import os 
-from s3pushpull import s3pushpull
+from s3pushpull2 import s3pushpull
 
 class ReadVidz:
 
@@ -11,51 +11,35 @@ class ReadVidz:
         self.frame_count= int(self.cam.get(cv2.CAP_PROP_FRAME_COUNT))
 
 
-    def pull_frames_s3(self,how_many=1):
+    def pull_frames_s3(self, how_many=1):
                 s3b=s3pushpull()
-                currentframe = 0
-                while(currentframe<=self.frame_count): 
-                    
-                    # reading from frame 
-                    ret,frame = self.cam.read()                 
-                    if ret:
-                        currentframe += 1
-                        if currentframe%(int(self.frame_count/how_many))==0:
-                            # if video is still left continue creating images 
-                            name = 'data/breakwater/frame' + str(currentframe) + '.jpg'
-                            print ('Creating...' + name) 
-                    
-                            # writing the extracted images                         
-                            cv2.imwrite(name, frame)
-                            s3b.upload_aws(name, 'S3:/breakwater/'+ name)
-                            # increasing counter so that it will 
-                            # show how many frames are created 
-                            
-                    else: 
-                        break
+                self.cam.set(1, self.frame_count-10)
+                res, frame = self.cam.read()
 
-    def pull_frames(self,how_many=1):
-                currentframe = 0
-                while(currentframe<=self.frame_count): 
+                name = 'data/breakwater/frame_last.jpg'
+                print ('Creating...' + name) 
+                # writing the extracted images
+                cv2.imwrite(name, frame)                         
+                s3b.upload_aws(name, 'S3:/data/breakwater/frame_last.jpg')
+
+                # currentframe = 0
+                # while(currentframe<=self.frame_count): 
                     
-                    # reading from frame 
-                    ret,frame = self.cam.read()                 
-                    if ret:
-                        currentframe += 1
-                        if currentframe%(int(self.frame_count/how_many))==0:
-                            # if video is still left continue creating images 
-                            name = './data/frame' + str(currentframe) + '.jpg'
-                            print ('Creating...' + name) 
-                    
-                            # writing the extracted images 
-                            cv2.imwrite(name, frame) 
-                    
-                            # increasing counter so that it will 
-                            # show how many frames are created 
+                #     # reading from frame 
+                #     ret,frame = self.cam.read()                 
+                #     if ret:
+                #         currentframe += 1
+                #         if currentframe%(int(self.frame_count/how_many))==0:
+                #             # if video is still left continue creating images 
+                #             name = 'data/breakwater/frame' + str(currentframe) + '.jpg'
+                #             print ('Creating...' + name) 
+                #             # writing the extracted images
+                #             cv2.imwrite(name, frame)                         
+                #             s3b.upload_aws(name, 'S3:/data/breakwater/frame' + str(currentframe) + '.jpg')
                             
-                    else: 
-                        break
-                            
+                #     else: 
+                #         break
+
 
     # Release all space and windows once done 
 

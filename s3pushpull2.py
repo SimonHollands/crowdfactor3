@@ -2,6 +2,7 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 import os
 
+
 class s3pushpull:
     # is_prod = os.environ.get('IS_HEROKU', None)
 
@@ -19,6 +20,9 @@ class s3pushpull:
         self.s3=boto3.client('s3', aws_access_key_id=self.ACCESS_KEY,
                             aws_secret_access_key=self.SECRET_KEY)
         self.bucket='surfcounter14367'
+
+    def delete(self,S3key):
+        self.s3.delete_object(self.bucket, S3key)
 
     def upload_aws(self, local_file, s3_file):
         bucket=self.bucket
@@ -48,9 +52,11 @@ class s3pushpull:
 
     def download_aws(self, local_file, s3_file):
         bucket=self.bucket
+        print("Herteee")
+        print(s3_file)
         try:
             self.s3.download_file(bucket, s3_file, local_file)
-            print("Download Successful")
+            print("Download Successful 666")
             return True
         except FileNotFoundError:
             print("The file was not found")
@@ -61,9 +67,12 @@ class s3pushpull:
 
     def download_aws_obj(self, local_file, s3_file):
         bucket=self.bucket
+        print("Herteee")
+        print(s3_file)
+
         try:
             self.s3.download_fileobj(bucket, s3_file, local_file)
-            print("Download Successful")
+            print("Download Successful 69")
             return True
         except FileNotFoundError:
             print("The file was not found")
@@ -111,52 +120,3 @@ class s3pushpull:
                 break
 
 
-
-#s3=s3pushpull()
-#s3.upload_aws_obj('/Users/hollands/dev/Surf-counter/models/yolo.h5', 'S3:/models/yolo.h5')
-
-#s3.download_aws('data/frameyewwwwwW.jpg','S3:/data/frame5394.jpg')
-
-
-#Push the models up:
-
-#s3.upload_aws('models/yolo.h5', 'S3:/models/yolo.h5')
-
-
-#s3=s3pushpull()
-#d=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
-#s3.download_aws('data/frameyewwwwwW.jpg',d[0])
-
-
-# ACCESS_KEY = os.environ['AWS_IAM_ACCESS_KEY'] #I think this is the EKC
-# SECRET_KEY =os.environ['AWS_IAM_SECRET_KEY'] #I think this is the admnin?
-
-# # s3=boto3.client('s3', aws_access_key_id=ACCESS_KEY,
-# #                             aws_secret_access_key=SECRET_KEY)
-
-
-#s3=s3pushpull()
-#d=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
-#s3.download_aws('data/frameyewwwwwW.jpg',d[0])
-
-#print(d)
-
-
-# s3.delete_files(Key=d[0])
-# d=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
-# print(d)
-
-# s3.upload_aws('data/frame7216.jpg','S3:/data/frame7216.jpg')
-# k=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
-# print('current list of files')
-# print(k)
-# s3b = boto3.resource('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
-# s3b.Object('surfcounter14367', 'S3:/data/frame7216.jpg').delete()
-# print('current list of files: After deletion')
-# k=list(s3.get_matching_s3_keys(prefix='S3:/data/'))
-# print(k)
-
-
-#s3b = boto3.resource('s3', aws_access_key_id=self.ACCESS_KEY,
-#                            aws_secret_access_key=self.SECRET_KEY))
-#s3b.Object('surfcounter14367', 'S3:/data/frame7216.jpg').delete()
