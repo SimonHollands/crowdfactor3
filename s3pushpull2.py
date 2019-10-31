@@ -2,10 +2,8 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 import os
 
-print("here 0")
 
 class s3pushpull:
-    print("here 1")
     # is_prod = os.environ.get('IS_HEROKU', None)
 
     # if is_prod:

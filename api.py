@@ -6,7 +6,7 @@ from os.path import isfile, join
 import os, shutil
 from Surf_counter.detector import Detect
 from Surf_counter.spot_urls import SpotUrls
-from s3pushpull import s3pushpull
+from s3pushpull2 import s3pushpull
 #i
 
 app = flask.Flask(__name__)
@@ -24,7 +24,6 @@ def api_surfercount():
 @app.route('/breakwater_image')
 def get_image():
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
-       
     if request.args.get('type') == '1':
         filename = 'pred.jpg'
     else:
