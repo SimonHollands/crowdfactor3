@@ -7,6 +7,7 @@ import os, shutil
 from Surf_counter.detector import Detect
 from Surf_counter.spot_urls import SpotUrls
 from s3pushpull import s3pushpull
+#i
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -29,7 +30,6 @@ def get_image():
     else:
         filename = 'pred.jpg'
     return send_file(filename, mimetype='image/jpg')
-
 
 @app.route('/', methods=['GET'])
 def home():
