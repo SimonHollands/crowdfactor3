@@ -24,7 +24,7 @@ def breakwater_count():
     return render_template("breakwater_count.html", message=out)
 
 @app.route('/breakwater_image')
-def get_image():
+def get_image(): 
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
     if request.args.get('type') == '1':
         filename = 'pred.jpg'
@@ -34,6 +34,7 @@ def get_image():
 
 @app.route('/')
 def index():
+    det.pull_images_s3()
     return render_template('index.html')
 
 @app.route('/cool_form', methods=['GET', 'POST'])

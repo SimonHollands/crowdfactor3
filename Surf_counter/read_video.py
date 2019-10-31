@@ -24,38 +24,13 @@ class ReadVidz:
                             # if video is still left continue creating images 
                             name = 'data/breakwater/frame' + str(currentframe) + '.jpg'
                             print ('Creating...' + name) 
-                    
-                            # writing the extracted images                         
-                            cv2.imwrite(name, frame)
-                            s3b.upload_aws(name, 'S3:/breakwater/'+ name)
-                            # increasing counter so that it will 
-                            # show how many frames are created 
+                            # writing the extracted images
+                            cv2.imwrite(name, frame)                         
+                            s3b.upload_aws(name, 'S3:/data/breakwater/frame' + str(currentframe) + '.jpg')
                             
                     else: 
                         break
 
-    def pull_frames(self,how_many=1):
-                currentframe = 0
-                while(currentframe<=self.frame_count): 
-                    
-                    # reading from frame 
-                    ret,frame = self.cam.read()                 
-                    if ret:
-                        currentframe += 1
-                        if currentframe%(int(self.frame_count/how_many))==0:
-                            # if video is still left continue creating images 
-                            name = './data/frame' + str(currentframe) + '.jpg'
-                            print ('Creating...' + name) 
-                    
-                            # writing the extracted images 
-                            cv2.imwrite(name, frame) 
-                    
-                            # increasing counter so that it will 
-                            # show how many frames are created 
-                            
-                    else: 
-                        break
-                            
 
     # Release all space and windows once done 
 
