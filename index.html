@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask Template Example</title>
+</head>
+
+<body>
+    <div>
+        <p>{{ message }}</p>
+
+        <p>{{ contacts }}</p>
+        <p>My Contacts:</p>
+        <ul>
+            {% for contact in contacts %}
+            <li>{{ contact }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

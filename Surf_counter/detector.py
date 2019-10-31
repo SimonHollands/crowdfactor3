@@ -10,9 +10,9 @@ import urllib.request
 s3=s3pushpull()
 
 class Detect:
-
+    scraper=ScrapeVideoLinks()
     def __init__(self):
-        self.current_link=SpotUrls.venice_static
+        self.current_link=self.scraper.get_link()
     
     #ScrapeVideoLinks
     def grab_frames(self):
@@ -20,9 +20,9 @@ class Detect:
         r=ReadVidz(self.current_link)
         r.pull_frames(5)
 
-    def pull_images_s3(self,link):
+    def pull_images_s3(self):
         '''Pull images from video'''
-        r=ReadVidz(link)
+        r=ReadVidz(self.current_link)
         r.pull_frames_s3(5)
 
     def detection(self):
