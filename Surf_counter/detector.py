@@ -4,9 +4,9 @@ from os.path import isfile, join
 import os, shutil 
 from Surf_counter.spot_urls import SpotUrls
 from Surf_counter.scrape_video_links import ScrapeVideoLinks
-from s3pushpull import s3pushpull
+from s3pushpull2 import s3pushpull
 import urllib.request
-
+#Something
 s3=s3pushpull()
 
 class Detect:
