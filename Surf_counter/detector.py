@@ -1,4 +1,3 @@
-from imageai.Detection import ObjectDetection
 from Surf_counter.read_video import ReadVidz
 from os import listdir
 from os.path import isfile, join
@@ -28,7 +27,7 @@ class Detect:
 
     def detection(self):
         #Get prediction from the api
-        response = urllib.request.urlopen('https://cfmodelserver.herokuapp.com/model')
+        response = urllib.request.urlopen('https://cfmodelserver.herokuapp.com/model').read().decode('ASCII')
 
         return response
 
