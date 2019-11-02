@@ -1,6 +1,6 @@
-# CrowdFactor
+# CrowdFactor [![CircleCI](https://circleci.com/gh/SimonHollands/crowdfactor3.svg?style=svg)](https://circleci.com/gh/SimonHollands/crowdfactor3)
 
-Crowdfactor is an app for real-time crowd surfbreak crowd prediction. It is powered by a custum Yolo deep learning computer vision model.
+Crowdfactor is an app for real-time crowd surfbreak crowd prediction. It is powered by a custum Yolo deep learning computer vision model. 
 * [CrowdFactor](https://crowdfactor.herokuapp.com/) - Deployed on Heroku
 * [HitModel](https://crowdfactor.herokuapp.com/) - Deep learning model api, deployed on Heroku
 

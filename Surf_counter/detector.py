@@ -13,6 +13,8 @@ class Detect:
     scraper=ScrapeVideoLinks()
     def __init__(self):
         self.current_link=self.scraper.get_link()
+        #self.current_link=SpotUrls.venice_static
+        
         print("Current Video Link: "+self.current_link)
 
     def pull_images_s3(self):

@@ -2,7 +2,7 @@
 import cv2 
 import os 
 from s3pushpull2 import s3pushpull
-
+import random 
 class ReadVidz:
 
     def __init__(self,cam_link):
@@ -13,13 +13,15 @@ class ReadVidz:
 
     def pull_frames_s3(self, how_many=1):
                 s3b=s3pushpull()
-                self.cam.set(1, self.frame_count-10)
+                self.cam.set(1, self.frame_count-random.randint(1, 1000) )
                 res, frame = self.cam.read()
 
                 name = 'data/breakwater/frame_last.jpg'
                 print ('Creating...' + name) 
                 # writing the extracted images
-                cv2.imwrite(name, frame)                         
+                crop_img = frame[0:0+525, 0:0+1280]
+
+                cv2.imwrite(name, crop_img)                         
                 s3b.upload_aws(name, 'S3:/data/breakwater/frame_last.jpg')
 
                 # currentframe = 0
