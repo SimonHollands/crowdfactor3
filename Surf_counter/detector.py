@@ -26,7 +26,7 @@ class Detect:
 
     def detection(self):
         #Get prediction from the api
-        response = urllib.request.urlopen('https://cfmodelserver.herokuapp.com/model').read().decode('ASCII')
+        response = urllib.request.urlopen('http://13.57.217.48/model').read().decode('ASCII')
 
         return response
 

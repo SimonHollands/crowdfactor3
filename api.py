@@ -11,6 +11,7 @@ from flask import render_template
 from flask import Flask, request, url_for, redirect, render_template
 #from flask_caching import Cache
 
+8000
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -52,4 +53,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(threaded=False,use_reloader=False)
+    app.run(threaded=False,use_reloader=False, port=8000)
