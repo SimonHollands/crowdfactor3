@@ -19,7 +19,7 @@ class ReadVidz:
                 name = 'data/breakwater/frame_last.jpg'
                 print ('Creating...' + name) 
                 # writing the extracted images
-                crop_img = frame[100:100+375, 0:0+1280]
+                crop_img = frame[100:100+325, 0:0+1280]
 
                 cv2.imwrite(name, crop_img)                         
                 s3b.upload_aws(name, 'S3:/data/breakwater/frame_last.jpg')
