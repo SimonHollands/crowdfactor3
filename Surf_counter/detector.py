@@ -12,8 +12,8 @@ s3=s3pushpull()
 class Detect:
     scraper=ScrapeVideoLinks()
     def __init__(self):
-        self.current_link=self.scraper.get_link()
-        #self.current_link=SpotUrls.venice_static
+        #self.current_link=self.scraper.get_link()
+        self.current_link=SpotUrls.venice_morning_good
         
         print("Current Video Link: "+self.current_link)
 
