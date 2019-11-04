@@ -10,13 +10,22 @@ from s3pushpull2 import s3pushpull
 from flask import render_template
 from flask import Flask, request, url_for, redirect, render_template
 #from flask_caching import Cache
+use_live=True
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-det=Detect()
+det=Detect(use_live)
 s3=s3pushpull()
+
+@app.route('/breakwater_route')
+#@cache.cached(timeout=5)
+def breakwater_route():
+    print ("In breakwater_count")
+    n_surfers=det.detection()
+    out=f'''There are {n_surfers} Surfers at the Breakwater. New Counts every 10 Minutes'''
+    return render_template("breakwater_count.html", message=out)
 
 @app.route('/breakwater_count')
 #@cache.cached(timeout=5)
@@ -44,13 +53,13 @@ def get_image():
     return send_file(filename, mimetype='image/jpg')
 
 @app.route('/breakwater_image_')
-def get_image_route(): 
+def (): 
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
     return redirect(url_for('get_image'))
 
 @app.route('/')
 def index1():
-    det=Detect()
+    det=Detect(use_live)
     det.pull_images_s3()
     return redirect(url_for('index'))
 
