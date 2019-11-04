@@ -56,6 +56,11 @@ def get_image():
         filename = 'pred.jpg'
     return send_file(filename, mimetype='image/jpg')
 
+@app.route('/breakwater_image2')
+def get_image_route(): 
+    print("refreshed pred.jpg")
+    s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
+    return redirect(url_for('get_image'))
 
 @app.route('/')
 def index1():
@@ -70,3 +75,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(threaded=False,use_reloader=False, port=8000)
+
+ #      <p style="text-align:center">Deep <img src="{{ url_for('logo') }}"  alt="Smiley face" align="middle"> Learning.</p></p>
+ 
