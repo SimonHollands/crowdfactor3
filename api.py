@@ -11,8 +11,6 @@ from flask import render_template
 from flask import Flask, request, url_for, redirect, render_template
 #from flask_caching import Cache
 
-8000
-
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
@@ -37,7 +35,12 @@ def show_loaded_image():
         filename = 'NEXT_UP.jpg'
     return send_file(filename, mimetype='image/jpg')
 
-@app.route('/breakwater_image')
+@app.route('/breakwater_image_')
+def get_image_route(): 
+    s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
+    return redirect(url_for('get_image'))
+
+app.route('/breakwater_image')
 def get_image(): 
     s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
     if request.args.get('type') == '1':
@@ -45,6 +48,7 @@ def get_image():
     else:
         filename = 'pred.jpg'
     return send_file(filename, mimetype='image/jpg')
+
 
 @app.route('/')
 def index1():
@@ -55,7 +59,6 @@ def index1():
 @app.route('/home')
 def index():
     return render_template('index.html')
-
 
 
 if __name__ == '__main__':
