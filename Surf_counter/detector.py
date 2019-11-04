@@ -11,11 +11,12 @@ s3=s3pushpull()
 
 class Detect:
     scraper=ScrapeVideoLinks()
-    def __init__(self):
-        self.static_link=SpotUrls.venice_morning_good
-        self.current_link=self.scraper.get_link()
-        self.current_link=self.static_link
-        
+    def __init__(self, use_live):
+        if use_live:
+            self.current_link=self.scraper.get_link()
+        else:
+            self.current_link=SpotUrls.venice_morning_good
+
     def pull_images_static(self):
         '''Pull images from video'''
         print ("In:pull_images_s3")
@@ -28,7 +29,6 @@ class Detect:
         r=ReadVidz(self.current_link)
         print("pass ReadVidz")
         r.pull_frames_s3(1)
-
 
     def detection(self):
         #Get prediction from the api

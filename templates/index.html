@@ -1,14 +1,18 @@
-<!doctype html>
-<html>
-        <h1>Deploying a Deep Learning Model to Predict Surf Crowds</h1>
-        <h2>Live Image:</h2>
+<html>    
+    <p style="text-align:center"> <img src="{{ url_for('logo') }}" alt="Smiley face"  </p></p>
+    <p style="text-align:center"> <strong>A deep learning model and pipeline to predict crowds at surf breaks</strong> </p></p>
+    <body>
+     <p >  </p> 
+     <p >  </p> 
 
-<body>
+     <p > <strong>CrowdFactor-Prototype:</strong> We pull live video feeds from a Venice Beach surf-webcam, sending the data up to our AWS S3 servers. <br> 
+          At the same time, we set up a deep learning AMI EC2 instance to deploy our Yolo CrowdFactor agorithm. Checkout the Venice Beach Prototype in Action Here! </p> 
 
-    <p><a href="{{ url_for('breakwater_count') }}">2. Get surfer count - Venice Breakwater!</a></p>
-    <p><a href="{{ url_for('get_image_route') }}">See Prediction Image (Reload a few times to get recent)!</a></p>
-    <p><a href="https://github.com/SimonHollands/crowdfactor3" >  Main Project Github! </a></p>
-    <p><a href="https://github.com/SimonHollands/cfmodelserver" > Model Server API Gitub !</a></p>
+    <p >  </p>           
+    </p>><a href="{{ url_for('breakwater_count') }}"> Check the number of surfers currently at Venice Breakwater!</a></p>
+    </p>><a href="{{ url_for('get_image') }}"> See the Prediction Image!</a></p>
+    </p>><a href="https://github.com/SimonHollands/crowdfactor3" >  Main Project Github! </a></p>
+    </p>><a href="https://github.com/SimonHollands/cfmodelserver" > Model Server API Gitub !</a></p>
 
 </body>
 </html>

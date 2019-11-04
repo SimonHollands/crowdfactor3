@@ -44,6 +44,10 @@ def show_loaded_image():
         filename = 'NEXT_UP.jpg'
     return send_file(filename, mimetype='image/jpg')
 
+@app.route('/logo')
+def logo(): 
+    return send_file('cfLogo.png', mimetype='image/png')
+
 @app.route('/breakwater_image')
 def get_image(): 
     if request.args.get('type') == '1':
@@ -52,10 +56,6 @@ def get_image():
         filename = 'pred.jpg'
     return send_file(filename, mimetype='image/jpg')
 
-@app.route('/breakwater_image_')
-def (): 
-    s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
-    return redirect(url_for('get_image'))
 
 @app.route('/')
 def index1():
