@@ -47,10 +47,16 @@ def get_image():
     return send_file(filename, mimetype='image/jpg')
 
 @app.route('/')
-def index():
+def index1():
     det=Detect()
     det.pull_images_s3()
+    return redirect(url_for('index'))
+
+@app.route('/home')
+def index():
     return render_template('index.html')
+
+
 
 if __name__ == '__main__':
     app.run(threaded=False,use_reloader=False, port=8000)
