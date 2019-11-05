@@ -48,6 +48,11 @@ def show_loaded_image():
 def logo(): 
     return send_file('cfLogo.png', mimetype='image/png')
 
+# @app.route('/avgcount')
+# def avgcount(): 
+#     mean=det.history()
+#     return mean
+
 @app.route('/breakwater_image')
 def get_image(): 
     if request.args.get('type') == '1':
@@ -70,7 +75,7 @@ def index1():
 
 @app.route('/home')
 def index():
-    return render_template('index.html')
+    return render_template('index.html' )
 
 
 if __name__ == '__main__':

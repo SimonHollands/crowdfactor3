@@ -6,6 +6,7 @@ from Surf_counter.spot_urls import SpotUrls
 from Surf_counter.scrape_video_links import ScrapeVideoLinks
 from s3pushpull2 import s3pushpull
 import urllib.request
+#import Surf_counter.analyze_history as History
 #Something
 s3=s3pushpull()
 
@@ -29,7 +30,11 @@ class Detect:
         r=ReadVidz(self.current_link)
         print("pass ReadVidz")
         r.pull_frames_s3(1)
-
+    
+    # def history(self):
+    #     mean=History.history_stats.mean
+    #     return mean
+    
     def detection(self):
         #Get prediction from the api
         response = urllib.request.urlopen('http://13.57.217.48/model').read().decode('ASCII')
