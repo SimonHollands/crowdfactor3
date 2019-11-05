@@ -4,7 +4,7 @@ from flask import send_file
 from os import listdir
 from os.path import isfile, join
 import os, shutil
-from Surf_counter.detector import Detect
+from Surf_counter.detector import Detect, DetectBreakwater
 from Surf_counter.spot_urls import SpotUrls
 from s3pushpull2 import s3pushpull
 from flask import render_template
@@ -16,7 +16,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-det=Detect(use_live)
+det=DetectBreakwater(use_live)
 s3=s3pushpull()
 
 @app.route('/breakwater_route')
@@ -56,12 +56,12 @@ def get_image():
 @app.route('/breakwater_image2')
 def get_image_route(): 
     print("refreshed pred.jpg")
-    s3.download_aws('pred.jpg', 'S3:/current_prediction/pred.jpg')
+    s3.download_aws('pred.jpg', 'S3:/breakwater/current_prediction/pred.jpg')
     return redirect(url_for('get_image'))
 
 @app.route('/')
 def index1():
-    det=Detect(use_live)
+    det=DetectBreakwater(use_live)
     det.pull_images_s3()
     return redirect(url_for('index'))
 
