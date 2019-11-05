@@ -48,17 +48,9 @@ def show_loaded_image():
 def logo(): 
     return send_file('cfLogo.png', mimetype='image/png')
 
-# @app.route('/avgcount')
-# def avgcount(): 
-#     mean=det.history()
-#     return mean
-
 @app.route('/breakwater_image')
 def get_image(): 
-    if request.args.get('type') == '1':
-        filename = 'pred.jpg'
-    else:
-        filename = 'pred.jpg'
+    filename = 'pred.jpg'
     return send_file(filename, mimetype='image/jpg')
 
 @app.route('/breakwater_image2')
@@ -77,9 +69,8 @@ def index1():
 def index():
     return render_template('index.html' )
 
-
 if __name__ == '__main__':
-    app.run(threaded=False,use_reloader=False, port=8000)
+    app.run(threaded=False,use_reloader=False)
 
  #      <p style="text-align:center">Deep <img src="{{ url_for('logo') }}"  alt="Smiley face" align="middle"> Learning.</p></p>
  
