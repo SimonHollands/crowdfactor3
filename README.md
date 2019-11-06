@@ -17,19 +17,15 @@ git clone https://github.com/SimonHollands/cfmodelserver
 ```
 
 ## Useage
-```dector.py``` is behind the wheel
-when the app loads, we load up surfbreak specific detectors
-```
-1. detectors are instantiated with a link to the relevent surf break mp4. 
-2. They run methods to pull data into the folders used for prediction
-
-detectors can return crowd counts, and the predicted images behind the crowd 
-
-
+Each surf break should be instantiated with a ```dector.py``` class
 
 ```
-
-
+Detectors are instantiated with a link to the relevent surf break mp4. 
+```
+```read_video.py``` and ```scrape_video_links.py``` methods are used to pull images into the S3 folders used by the model API 
+```
+detectors can then call the model api for crowd counts, and the predicted images (with bounding boxes) behind the counts
+```
 
 ## Deploying on Heroku
 ```
