@@ -1,15 +1,24 @@
-<!doctype html>
-<html>
-        <h1>Deploying a Deep Learning Model to Predict Surf Crowds</h1>
-        <h2>Live Image:</h2>
-        <img src="{{ url_for('show_loaded_image') }}" alt="Italian Trulli">>
+<html>    
+    <p style="text-align:center"> <img src="{{ url_for('logo') }}" alt="Smiley face"  </p></p>
+    <p style="text-align:center"> <strong>A deep learning model and pipeline to predict crowds at surf breaks</strong> </p></p>
+    <body>
+     <p >  </p> 
+     <p >  </p> 
 
-<body>
+     <p > <strong>CrowdFactor-Prototype:</strong> We pull live video feeds from a Venice Beach surf-webcam, sending the data up to our AWS S3 servers. <br> 
+          At the same time, we set up a deep learning AMI EC2 instance to deploy our Yolo CrowdFactor agorithm. Checkout the Venice Beach Prototype in Action Here! </p> 
 
-    <p><a href="{{ url_for('breakwater_count') }}">2. Get surfer count - Venice Breakwater!</a></p>
-    <p><a href="{{ url_for('get_image') }}">See Prediction Image (Reload a few times to get recent)!</a></p>
-    <p><a href="https://github.com/SimonHollands/crowdfactor3" >  Main Project Github! </a></p>
-    <p><a href="https://github.com/SimonHollands/cfmodelserver" > Model Server API Gitub !</a></p>
+    <p >  </p>           
+    </p> <strong>Current crowd at Breakwater Surfbreak:</strong> {{ message1 }}! | {{crowd1}} <a href="{{ url_for('breakwater_image') }}"> | See the Prediction Image breakwater!</a> </p>
+    </p> <strong>Current crowd at Topanga Surfbreak:</strong> {{ message2 }}! | {{crowd2}} <a href="{{ url_for('topanga_image') }}"> | See the Prediction Image Topanga!</a> </p>
+    
+    <p > <strong>Next Steps:</strong> Link to a database for crowd tracking. Compare current crowds to hisorical in real time <br> 
+    Retrain model using custom surfcam training images.
+    </p> 
+
+
+</p>><a href="https://github.com/SimonHollands/crowdfactor3" >  Main Project Github! </a></p>
+    </p>><a href="https://github.com/SimonHollands/cfmodelserver" > Model Server API Gitub !</a></p>
 
 </body>
 </html>

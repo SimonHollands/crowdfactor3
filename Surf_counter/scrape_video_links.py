@@ -7,14 +7,14 @@ today=datetime.today().strftime('%Y%m%d')
 
 class ScrapeVideoLinks:
 
-    def __init__(self, camrewind_link=SpotUrls.lookup['venice_beach'],tofind_str=today+'T', occurance_n=3):
-        self.main="https://camrewinds.cdn-surfline.com/live/wc-venicebeachclose.stream."
-        self.camrewind_link=camrewind_link
+    def __init__(self,tofind_str=today+'T', occurance_n=3, surfbreak='breakwater'):
+        self.camrewind_link=SpotUrls.lookup[surfbreak]
+        self.main=SpotUrls.lookupmp4[surfbreak]
+        self.camrewind_link=self.camrewind_link
         self.tofind_str =tofind_str
         self.page = requests.get(self.camrewind_link)
         self.soup = BeautifulSoup(self.page.content)
         self.soup_str=str(self.soup)
-
 
 
     def nth(self,Xstr):

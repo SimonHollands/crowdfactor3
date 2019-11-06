@@ -3,6 +3,7 @@ import cv2
 import os 
 from s3pushpull2 import s3pushpull
 import random 
+
 class ReadVidz:
 
     def __init__(self,cam_link):
@@ -10,8 +11,7 @@ class ReadVidz:
         self.cam = cv2.VideoCapture(self.cam_link)
         self.frame_count= int(self.cam.get(cv2.CAP_PROP_FRAME_COUNT))
 
-
-    def pull_frames_s3(self, how_many=1):
+    def pull_frames_s3(self, how_many=1, s3key='S3:/data/breakwater/frame_last.jpg'):
                 s3b=s3pushpull()
                 self.cam.set(1, self.frame_count-random.randint(1, 1000) )
                 res, frame = self.cam.read()
@@ -19,31 +19,14 @@ class ReadVidz:
                 name = 'data/breakwater/frame_last.jpg'
                 print ('Creating...' + name) 
                 # writing the extracted images
-                crop_img = frame[0:0+525, 0:0+1280]
+                crop_img = frame[100:100+325, 0:0+1280]
+                crop_img = frame
+
 
                 cv2.imwrite(name, crop_img)                         
-                s3b.upload_aws(name, 'S3:/data/breakwater/frame_last.jpg')
-
-                # currentframe = 0
-                # while(currentframe<=self.frame_count): 
-                    
-                #     # reading from frame 
-                #     ret,frame = self.cam.read()                 
-                #     if ret:
-                #         currentframe += 1
-                #         if currentframe%(int(self.frame_count/how_many))==0:
-                #             # if video is still left continue creating images 
-                #             name = 'data/breakwater/frame' + str(currentframe) + '.jpg'
-                #             print ('Creating...' + name) 
-                #             # writing the extracted images
-                #             cv2.imwrite(name, frame)                         
-                #             s3b.upload_aws(name, 'S3:/data/breakwater/frame' + str(currentframe) + '.jpg')
-                            
-                #     else: 
-                #         break
+                s3b.upload_aws(name, s3key)
 
 
-    # Release all space and windows once done 
 
 #r=ReadVidz("https://camrewinds.cdn-surfline.com/live/wc-venicebeachclose.stream.20191027T211834705.mp4")#reader.pull_frames(how_many=10)
 #r.pull_frames_s3()

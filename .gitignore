@@ -4,3 +4,10 @@
 *.h5
 */explore
 **/explore
+*/.png
+**/.png
+*/.DS_Store
+**/.DS_Store
+*.DS_Store
+Views3.py
+__pycache__
