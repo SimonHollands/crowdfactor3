@@ -6,3 +6,7 @@
 **/explore
 */.png
 **/.png
+*/.DS_Store
+**/.DS_Store
+*.DS_Store
+Views3.py
