@@ -62,7 +62,7 @@ def index1():
 @app.route('/home')
 def index():
     crowd1= f''' {random.randint(1,100)}% less crowded than normal '''
-    crowd2= f''' {random.randint(1,100)}% less crowded than normal '''
+    crowd2 = f''' {random.randint(1,100)}% less crowded than normal '''
 
     n_surfers=det.detection()
     n_surfers2=det_topanga.detection()

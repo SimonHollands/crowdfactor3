@@ -18,7 +18,7 @@ git clone https://github.com/SimonHollands/cfmodelserver
 
 ## Useage
 Each surf break should be instantiated with a ```dector.py``` class. Detectors are instantiated with a link to the relevent surf break mp4. 
-```read_video.py``` and ```scrape_video_links.py``` methods are used to pull images into the S3 folders used by the model API 
+```read_video.py``` and ```scrape_video_links.py``` methods are used to pull images into the S3 folders used by the model API. 
 ```dector.py``` class can  call the model api for crowd counts, and the predicted images (with bounding boxes) behind the counts.
 
 ## Deploying on Heroku
