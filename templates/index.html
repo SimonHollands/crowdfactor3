@@ -9,9 +9,8 @@
           At the same time, we set up a deep learning AMI EC2 instance to deploy our Yolo CrowdFactor agorithm. Checkout the Venice Beach Prototype in Action Here! </p> 
 
     <p >  </p>           
-    </p>><a href="{{ url_for('breakwater_count') }}"> Check the number of surfers currently at Venice Breakwater!</a></p>
-    </p>><a href="{{ url_for('breakwater_image') }}"> See the Prediction Image breakwater!</a></p>
-    </p>><a href="{{ url_for('topanga_image') }}"> See the Prediction Image topanga!</a></p>
+    </p> <strong>Current crowd at Breakwater Surfbreak:</strong> {{ message1 }}! | {{crowd1}} <a href="{{ url_for('breakwater_image') }}"> | See the Prediction Image breakwater!</a> </p>
+    </p> <strong>Current crowd at Topanga Surfbreak:</strong> {{ message2 }}! | {{crowd2}} <a href="{{ url_for('topanga_image') }}"> | See the Prediction Image Topanga!</a> </p>
     
     <p > <strong>Next Steps:</strong> Link to a database for crowd tracking. Compare current crowds to hisorical in real time <br> 
     Retrain model using custom surfcam training images.

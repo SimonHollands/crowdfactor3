@@ -1,4 +1,5 @@
 import flask
+import random
 from flask import request, jsonify
 from flask import send_file
 from os import listdir
@@ -17,33 +18,25 @@ app.config["DEBUG"] = True
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 det=DetectBreakwater()
+det_topanga=DetectTopanga()
+
 s3=s3pushpull()
 
 @app.route('/topanga_count')
 #@cache.cached(timeout=5)
 def topanga_count():
-    det=DetectTopanga()
-    det.pull_images_s3()
-
-    print ("In topanga count")
+    det_topanga=DetectTopanga()
+    det_topanga.pull_images_s3()
     n_surfers=det.detection()
-    out=f'''There are {n_surfers} Surfers at Topanga. New Counts every 10 Minutes'''
+    out=f'''There are {n_surfers} Surfers at Topanga'''
     return render_template("topanga_count.html", message=out)
-
 
 @app.route('/breakwater_count')
 #@cache.cached(timeout=5)
 def breakwater_count():
-    print ("In breakwater_count")
     n_surfers=det.detection()
-    out=f'''There are {n_surfers} Surfers at the Breakwater. New Counts every 10 Minutes'''
+    out=f'''There are {n_surfers} Surfers at the Breakwater'''
     return render_template("breakwater_count.html", message=out)
-
-# @app.route('/loaded_image')
-# def show_loaded_image(): 
-#     s3.download_aws('NEXT_UP.jpg', 'S3:/data/breakwater/frame_last.jpg')
-#     filename = 'NEXT_UP.jpg'
-#     return send_file(filename, mimetype='image/jpg')
 
 @app.route('/logo')
 def logo(): 
@@ -61,13 +54,20 @@ def topanga_image():
 
 @app.route('/')
 def index1():
+    det_topanga=DetectTopanga()
     det=DetectBreakwater()
     det.pull_images_s3()
     return redirect(url_for('index'))
 
 @app.route('/home')
 def index():
-    return render_template('index.html' )
+    crowd1= f''' {random.randint(1,100)}% less crowded than normal '''
+    crowd2= f''' {random.randint(1,100)}% less crowded than normal '''
+
+    n_surfers=det.detection()
+    n_surfers2=det_topanga.detection()
+
+    return render_template('index.html',message1=str(n_surfers), message2=str(n_surfers2), crowd1=crowd1, crowd2=crowd2)
 
 if __name__ == '__main__':
     app.run(threaded=False,use_reloader=False)
