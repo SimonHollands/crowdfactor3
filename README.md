@@ -17,10 +17,9 @@ git clone https://github.com/SimonHollands/cfmodelserver
 ```
 
 ## Useage
-```
-``` dector.py ``` is behind the wheel
+```dector.py``` is behind the wheel
 when the app loads, we load up surfbreak specific detectors
-
+```
 1. detectors are instantiated with a link to the relevent surf break mp4. 
 2. They run methods to pull data into the folders used for prediction
 
