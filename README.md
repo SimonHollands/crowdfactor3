@@ -11,12 +11,33 @@ Crowdfactor is an app for real-time crowd surfbreak crowd prediction. It is powe
 
 
 ## Install
-
 ```
 git clone https://github.com/SimonHollands/crowdfactor3
 git clone https://github.com/SimonHollands/cfmodelserver 
 ```
 
+## Useage
+```
+``` dector.py ``` is behind the wheel
+when the app loads, we load up surfbreak specific detectors
+
+1. detectors are instantiated with a link to the relevent surf break mp4. 
+2. They run methods to pull data into the folders used for prediction
+
+detectors can return crowd counts, and the predicted images behind the crowd 
+
+
+
+```
+
+
+
+## Deploying on Heroku
+```
+1. Create new app
+2. connect it to github branch for deployment.
+3. Need procfile, and requirements
+```
 
 ## License
 Copyright (c) 2019 Simon Hollands  
