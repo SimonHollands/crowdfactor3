@@ -4,7 +4,7 @@ from flask import send_file
 from os import listdir
 from os.path import isfile, join
 import os, shutil
-from Surf_counter.detector import Detect, DetectBreakwater
+from Surf_counter.detector import DetectTopanga, DetectBreakwater
 from Surf_counter.spot_urls import SpotUrls
 from s3pushpull2 import s3pushpull
 from flask import render_template
@@ -16,16 +16,20 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-det=DetectBreakwater(use_live)
+det=DetectBreakwater()
 s3=s3pushpull()
 
-@app.route('/breakwater_route')
+@app.route('/topanga_count')
 #@cache.cached(timeout=5)
-def breakwater_route():
-    print ("In breakwater_count")
+def topanga_count():
+    det=DetectTopanga()
+    det.pull_images_s3()
+
+    print ("In topanga count")
     n_surfers=det.detection()
-    out=f'''There are {n_surfers} Surfers at the Breakwater. New Counts every 10 Minutes'''
-    return render_template("breakwater_count.html", message=out)
+    out=f'''There are {n_surfers} Surfers at Topanga. New Counts every 10 Minutes'''
+    return render_template("topanga_count.html", message=out)
+
 
 @app.route('/breakwater_count')
 #@cache.cached(timeout=5)
@@ -35,33 +39,29 @@ def breakwater_count():
     out=f'''There are {n_surfers} Surfers at the Breakwater. New Counts every 10 Minutes'''
     return render_template("breakwater_count.html", message=out)
 
-@app.route('/loaded_image')
-def show_loaded_image(): 
-    s3.download_aws('NEXT_UP.jpg', 'S3:/data/breakwater/frame_last.jpg')
-    if request.args.get('type') == '1':
-        filename = 'NEXT_UP.jpg'
-    else:
-        filename = 'NEXT_UP.jpg'
-    return send_file(filename, mimetype='image/jpg')
+# @app.route('/loaded_image')
+# def show_loaded_image(): 
+#     s3.download_aws('NEXT_UP.jpg', 'S3:/data/breakwater/frame_last.jpg')
+#     filename = 'NEXT_UP.jpg'
+#     return send_file(filename, mimetype='image/jpg')
 
 @app.route('/logo')
 def logo(): 
     return send_file('cfLogo.png', mimetype='image/png')
 
 @app.route('/breakwater_image')
-def get_image(): 
-    filename = 'pred.jpg'
-    return send_file(filename, mimetype='image/jpg')
+def breakwater_image(): 
+    s3.download_aws('breakwater_pred.jpg', 'S3:/data/breakwater/pred.jpg')
+    return send_file('breakwater_pred.jpg', mimetype='image/jpg')
 
-@app.route('/breakwater_image2')
-def get_image_route(): 
-    print("refreshed pred.jpg")
-    s3.download_aws('pred.jpg', 'S3:/breakwater/current_prediction/pred.jpg')
-    return redirect(url_for('get_image'))
+@app.route('/topanga_image')
+def topanga_image(): 
+    s3.download_aws('topanga_pred.jpg', 'S3:/data/topanga/pred.jpg')
+    return send_file('topanga_pred.jpg', mimetype='image/jpg')
 
 @app.route('/')
 def index1():
-    det=DetectBreakwater(use_live)
+    det=DetectBreakwater()
     det.pull_images_s3()
     return redirect(url_for('index'))
 
@@ -74,3 +74,4 @@ if __name__ == '__main__':
 
  #      <p style="text-align:center">Deep <img src="{{ url_for('logo') }}"  alt="Smiley face" align="middle"> Learning.</p></p>
  
+
