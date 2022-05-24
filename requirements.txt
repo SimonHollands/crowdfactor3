@@ -1,7 +1,7 @@
 #requirements for mytensor env.
 flask
 gunicorn
-tensorflow==1.14.0
+tensorflow==2.6.4
 pillow
 lxml
 Cython
